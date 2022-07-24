@@ -1,4 +1,8 @@
-message(STATUS ${CMAKE_CURRENT_LIST_DIR})
+#Require a minimum version
+cmake_minimum_required(VERSION 3.10)
+
+project(uva-console)
+
 add_library(uva-console
 	${CMAKE_CURRENT_LIST_DIR}/src/console.cpp
 )
