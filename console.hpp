@@ -24,6 +24,12 @@ namespace uva
 
         }; 
 
+        struct arg_binding
+        {
+            std::function<void()> handler;
+            size_t argc;
+        };
+
         struct color
         {
             const size_t code;
@@ -117,5 +123,12 @@ namespace uva
 
             log_warning(msg);
         }
+
+        std::vector<std::string>& get_args();
+        void init_args(const int argc, char** argv);
+
+        size_t args_count();
+        bool has_args();
+        std::string front_arg();
     };
 };
