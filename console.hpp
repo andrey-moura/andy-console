@@ -2,8 +2,10 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include <map>
 #include <format>
+#include <functional>
 
 #ifdef _WIN32
     #include <windows.h>
