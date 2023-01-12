@@ -89,12 +89,7 @@ namespace uva
         template<class... Args>
         void log_error(const std::string& fmt, Args... args)
         {
-            #ifdef USE_FMT_FORMT
-                std::string msg = vformat(fmt, std::make_format_args(args...));
-            #else
-                std::string msg = std::format(fmt, std::forward<Args>(args)...);
-            #endif
-
+            std::string msg = vformat(fmt, std::make_format_args(args...));
             log_error(msg);
         }
 
