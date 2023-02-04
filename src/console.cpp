@@ -1,5 +1,10 @@
 #include <console.hpp>
 
+void uva::console::log(const std::string & msg)
+{
+    std::cout << msg << std::endl;
+}
+
 void uva::console::log_error(const std::string& msg)
 {
     std::cerr << uva::console::color(uva::console::color_code::red) << msg << std::endl;

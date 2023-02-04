@@ -81,7 +81,7 @@ void console_controller::controller()
 
     std::string controller_name = params[0];
 
-    static std::string controller_header_format =
+    const char* const controller_header_format =
 R"~~~(#include <application.hpp>
 
 using namespace uva;
@@ -94,7 +94,7 @@ public:
 }};
 )~~~";
 
-    static std::string controller_source_format =
+    const char* const controller_source_format =
 R"~~~(#include <{}_controller.hpp>
 
 #include <iostream>

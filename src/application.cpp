@@ -9,7 +9,7 @@ using namespace console;
 void application::init(int argc, const char **argv)
 {
 #if 0
-	const char* debug_arguments[]{ argv[0], "new", "Teste", "--git" };
+	const char* debug_arguments[]{ argv[0], "init", "C:\\Moonslate\\UserTracking\\user-tracking-api\\config\\routes.cpp", "484" };
 
     const size_t argument_count = sizeof(debug_arguments) / sizeof(const char*);
 	argc = argument_count;
@@ -29,15 +29,21 @@ void application::init(int argc, const char **argv)
     }
 
     std::string arg;
-    size_t param_index = 0;
 
     if(argc > 2) {
         for(size_t i = 0; i < argc-2; ++i)
         {
             arg = argv[i+2];
-            params[param_index] = arg;
+            params[i] = arg;
         }
     }
 
-    dispatch(action, connection, params, empty_map, "");
+    basic_action_target target = find_dispatch_target(action, connection);
+
+    if(target.controller) {
+        target.controller->params = params;
+        dispatch(target, connection);
+    } else {
+        //help
+    }
 }
