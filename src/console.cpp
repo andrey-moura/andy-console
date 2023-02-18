@@ -1,8 +1,33 @@
 #include <console.hpp>
+#include <filesystem>
+#include <fstream>
 
-void uva::console::log(const std::string & msg)
+void uva::console::put_on_cout(const std::string & msg)
 {
     std::cout << msg << std::endl;
+}
+
+std::ofstream& get_log()
+{
+    static std::ofstream* stream = nullptr;
+
+    if(!stream) {
+        std::filesystem::path logs_folder = std::filesystem::absolute("logs");
+        if(!std::filesystem::exists(logs_folder)) {
+            if(!std::filesystem::create_directories(logs_folder)) {
+                throw std::runtime_error("error: cannot create directory");
+            }
+        }
+        stream = new std::ofstream(logs_folder / "log.txt");
+    }
+    return *stream;
+}
+
+void uva::console::log(const std::string &msg)
+{
+    std::ofstream& stream = get_log();
+    stream << msg << "\r\n";
+    stream.flush();
 }
 
 void uva::console::log_error(const std::string& msg)

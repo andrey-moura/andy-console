@@ -84,6 +84,15 @@ namespace uva
             }
         };
 
+        void put_on_cout(const std::string& msg);
+
+        template<class... Args>
+        void format_on_cout(const std::string& fmt, Args... args)
+        {
+            std::string msg = std::vformat(fmt, std::make_format_args(args...));
+            put_on_cout(msg);
+        }
+
         void log(const std::string& msg);
 
         template<class... Args>
