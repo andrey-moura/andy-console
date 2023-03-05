@@ -8,14 +8,6 @@ using namespace console;
 
 void application::init(int argc, const char **argv)
 {
-#if 0
-	const char* debug_arguments[]{ argv[0], "init", "C:\\Moonslate\\UserTracking\\user-tracking-api\\config\\routes.cpp", "484" };
-
-    const size_t argument_count = sizeof(debug_arguments) / sizeof(const char*);
-	argc = argument_count;
-	argv = debug_arguments;
-
-#endif
     //starts a new connection. 
     std::shared_ptr<basic_connection> connection = std::make_shared<basic_connection>();
     var params = empty_map;
