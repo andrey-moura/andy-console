@@ -1,3 +1,5 @@
+#pragma once
+
 #include <routing.hpp>
 
 #define DECLARE_CONSOLE_APPLICATION(...) \
@@ -14,7 +16,19 @@ namespace uva
     {
         namespace application
         {
+            struct argument
+            {
+                std::string name;
+                bool        optional;
+            };
+            struct action
+            {
+                std::string route;
+                std::vector<argument> arguments;
+                std::vector<std::string> switchs;
+            };
             void init(int argc, const char **argv);
+            action action_from_command_line(std::string command_line);
         }; // namespace application
         
     }; // namespace console
