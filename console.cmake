@@ -12,6 +12,7 @@ function(add_console_app name)
         "${CMAKE_CURRENT_LIST_DIR}/config/routes.cpp")
 
     include_directories("${CMAKE_CURRENT_LIST_DIR}/include/controllers")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/include/")
 
     message(STATUS "Get these files: ${source_files}")
 
