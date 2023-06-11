@@ -130,6 +130,8 @@ namespace uva
         }
 
         std::vector<std::string>& get_args();
+        std::map<std::string, std::string>& get_named_args();
+
         void init_args(const int argc, char** argv);
 
         size_t args_count();
