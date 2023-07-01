@@ -11,9 +11,6 @@ function(add_console_app name)
         ${source_files}
         "${CMAKE_CURRENT_LIST_DIR}/config/routes.cpp")
 
-    include_directories("${CMAKE_CURRENT_LIST_DIR}/include/controllers")
-    include_directories("${CMAKE_CURRENT_LIST_DIR}/include/")
-
     message(STATUS "Get these files: ${source_files}")
 
     add_executable(
@@ -22,6 +19,9 @@ function(add_console_app name)
 
         ${source_files}
     )
+
+    target_include_directories(${name} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/include/controllers")
+    target_include_directories(${name} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/include/")
 
     if(WIN32)
         target_link_options(${name} PUBLIC /SAFESEH:NO)
