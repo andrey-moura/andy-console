@@ -23,7 +23,7 @@ void application::init(int argc, const char **argv)
 {
     //starts a new connection. 
     std::shared_ptr<basic_connection> connection = std::make_shared<basic_connection>();
-    var params = empty_map;
+    var params = var::map();
 
     std::string cwd = argv[0];
 
