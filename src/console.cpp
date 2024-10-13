@@ -25,9 +25,7 @@ std::ofstream& get_log()
 
 void uva::console::log(const std::string &msg)
 {
-    std::ofstream& stream = get_log();
-    stream << msg << "\r\n";
-    stream.flush();
+    std::cout << msg << std::endl;
 }
 
 void uva::console::log_error(const std::string& msg)
