@@ -5,8 +5,8 @@ project(uva-console)
 
 add_library(uva-console
 	${CMAKE_CURRENT_LIST_DIR}/src/console.cpp
-	${CMAKE_CURRENT_LIST_DIR}/src/application.cpp
 )
+# ${CMAKE_CURRENT_LIST_DIR}/src/application.cpp
 
 set(CONSOLE_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR} )
 
