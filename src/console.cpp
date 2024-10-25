@@ -43,12 +43,12 @@ void uva::console::log_warning(const std::string& msg)
     std::cout << uva::console::color(uva::console::color_code::yellow) << msg << std::endl;
 }
 
+void uva::console::log_debug(const std::string& msg)
+{
 #ifndef NDEBUG
-    void uva::console::log_debug(const std::string& msg)
-    {
-        get_log() << msg << std::endl;
-    }
+    get_log() << msg << std::endl;
 #endif
+}
 
 std::vector<std::string>& uva::console::get_args()
 {

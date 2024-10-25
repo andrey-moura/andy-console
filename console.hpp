@@ -130,7 +130,7 @@ namespace uva
         }
 
 #ifdef NDEBUG
-        void log_debug(const std::string& msg) {}
+        void log_debug(const std::string& msg);
         template<class... Args>
         void log_debug(const std::string& fmt, Args... args) {}    
 #else
