@@ -129,7 +129,23 @@ namespace uva
             log_warning(msg);
         }
 
+#ifdef NDEBUG
+        void log_debug(const std::string& msg);
+        template<class... Args>
+        void log_debug(const std::string& fmt, Args... args) {}    
+#else
+        void log_debug(const std::string& msg);
+
+        template<class... Args>
+        void log_debug(const std::string& fmt, Args... args)
+        {
+            std::string msg = std::vformat(fmt, std::make_format_args(args...));
+            log_debug(msg);
+        }
+#endif
         std::vector<std::string>& get_args();
+        std::map<std::string, std::string>& get_named_args();
+
         void init_args(const int argc, char** argv);
 
         size_t args_count();

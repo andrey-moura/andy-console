@@ -25,9 +25,7 @@ std::ofstream& get_log()
 
 void uva::console::log(const std::string &msg)
 {
-    std::ofstream& stream = get_log();
-    stream << msg << "\r\n";
-    stream.flush();
+    std::cout << msg << std::endl;
 }
 
 void uva::console::log_error(const std::string& msg)
@@ -45,6 +43,13 @@ void uva::console::log_warning(const std::string& msg)
     std::cout << uva::console::color(uva::console::color_code::yellow) << msg << std::endl;
 }
 
+void uva::console::log_debug(const std::string& msg)
+{
+#ifndef NDEBUG
+    get_log() << msg << std::endl;
+#endif
+}
+
 std::vector<std::string>& uva::console::get_args()
 {
     static std::vector<std::string> args;
@@ -52,12 +57,52 @@ std::vector<std::string>& uva::console::get_args()
     return args;
 }
 
+std::map<std::string, std::string>& uva::console::get_named_args()
+{
+    static std::map<std::string, std::string> named_args;
+
+    return named_args;
+}
+
+
 void uva::console::init_args(const int argc, char** argv)
 {
     auto& args = get_args();
+    auto& named_args = get_named_args();
+
+    args.reserve(argc);
 
     for(size_t i = 1; i < argc; ++i) {
-        args.push_back(argv[i]);
+        std::string_view arg = argv[i];
+        args.push_back(std::string(arg));
+
+        if(arg.starts_with("--")) {
+            std::string key;
+            std::string val;
+
+            size_t to_reserve = 128;
+            key.reserve(to_reserve);
+            val.reserve(to_reserve);
+
+            arg.remove_prefix(2);
+
+            while(arg.size() && !arg.starts_with('=')) {
+                key.push_back(arg.front());
+                arg.remove_prefix(1);
+            }
+
+            if(arg.size()) {
+                arg.remove_prefix(1);
+
+                while(arg.size()) {
+                    val.push_back(arg.front());
+                    arg.remove_prefix(1);
+                }
+            }
+
+            named_args.insert({key,val});
+        }
+
     }
 }
 

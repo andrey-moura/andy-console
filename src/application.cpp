@@ -1,24 +1,29 @@
 #include <application.hpp>
 
 #include <iostream>
+#include <sstream>
 
 using namespace uva;
 using namespace routing;
 using namespace console;
 
+void print_help()
+{
+    auto& routes = uva::routing::get_routes();
+
+    log_warning("COMMANDS:");
+
+    for(const auto& route : routes)
+    {
+        log_success("\t{}", route.first);
+    }
+}
+
 void application::init(int argc, const char **argv)
 {
-#if 0
-	const char* debug_arguments[]{ argv[0], "init", "C:\\Moonslate\\UserTracking\\user-tracking-api\\config\\routes.cpp", "484" };
-
-    const size_t argument_count = sizeof(debug_arguments) / sizeof(const char*);
-	argc = argument_count;
-	argv = debug_arguments;
-
-#endif
     //starts a new connection. 
     std::shared_ptr<basic_connection> connection = std::make_shared<basic_connection>();
-    var params = empty_map;
+    var params = var::map();
 
     std::string cwd = argv[0];
 
@@ -44,6 +49,33 @@ void application::init(int argc, const char **argv)
         target.controller->params = params;
         dispatch(target, connection);
     } else {
-        //help
+        print_help();
+    }
+}
+
+application::action application::action_from_command_line(std::string command_line)
+{
+    application::action action;
+
+    std::stringstream ss(command_line);
+
+    if(command_line.empty() || !(ss >> action.route))
+    {
+        throw std::logic_error("error: an command line cannot be empty");
+    }
+
+    bool started_optional_paramaters = false;
+
+    std::string buffer;
+    while(ss >> buffer)
+    {
+        if(buffer.starts_with('[')) {
+            buffer.erase(0, 1);
+            started_optional_paramaters = true;
+        } else if(buffer.ends_with(']')) {
+            buffer.pop_back();
+        }
+
+        action.arguments.push_back({buffer,started_optional_paramaters});
     }
 }
