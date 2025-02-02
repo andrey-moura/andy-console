@@ -50,7 +50,7 @@ void uva::console::log_warning(const std::string &msg) {
 
 void uva::console::log_debug(const std::string& msg)
 {
-#ifndef NDEBUG
+#ifdef __UVA_DEBUG__
     get_log() << msg << std::endl;
 #endif
 }
