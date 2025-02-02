@@ -120,15 +120,37 @@ namespace uva
             log_success(msg);
         }
 
+        template<class... Args>
+        void log_success(std::string_view fmt, Args... args)
+        {
+            std::string msg = std::vformat(fmt, std::make_format_args(args...));
+            log_success(msg);
+        }
+
+        void print_warning(std::string_view msg);
+
         void log_warning(const std::string& msg);
 
         template<class... Args>
         void log_warning(const std::string& fmt, Args... args)
         {
             std::string msg = std::vformat(fmt, std::make_format_args(args...));
-            log_warning(msg);
+            //log_warning(msg);
         }
 
+        template<class... Args>
+        void log_warning(std::string_view fmt, Args... args)
+        {
+            std::string msg = std::vformat(fmt, std::make_format_args(args...));
+            //log_warning(msg);
+        }
+
+        template<class... Args>
+        void log_warning(const char* fmt, Args... args)
+        {
+            std::string msg = std::vformat(fmt, std::make_format_args(args...));
+            //log_warning(msg);
+        }
 #ifdef NDEBUG
         void log_debug(const std::string& msg);
         template<class... Args>

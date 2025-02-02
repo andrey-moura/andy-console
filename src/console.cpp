@@ -38,9 +38,14 @@ void uva::console::log_success(const std::string& msg)
     std::cout << uva::console::color(uva::console::color_code::green) << msg << std::endl;
 }
 
-void uva::console::log_warning(const std::string& msg)
+void uva::console::print_warning(std::string_view msg)
 {
-    std::cout << uva::console::color(uva::console::color_code::yellow) << msg << std::endl;
+    std::cout << uva::console::color(uva::console::color_code::yellow) << msg.data();
+}
+
+void uva::console::log_warning(const std::string &msg) {
+  std::cout << uva::console::color(uva::console::color_code::yellow) << msg
+            << std::endl;
 }
 
 void uva::console::log_debug(const std::string& msg)
