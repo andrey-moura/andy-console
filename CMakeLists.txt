@@ -12,7 +12,7 @@ set(CONSOLE_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR} )
 
 include(${CONSOLE_ROOT_DIR}/console.cmake)
 
-target_link_libraries(uva-console uva-core)
+target_link_libraries(uva-console)
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
