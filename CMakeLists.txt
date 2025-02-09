@@ -26,4 +26,4 @@ if(UVA_CONSOLE_IS_TOP_LEVEL)
 endif()
 
 install(TARGETS uva-console DESTINATION lib)
-install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/uva DESTINATION include/uva)
+install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/uva DESTINATION include)
