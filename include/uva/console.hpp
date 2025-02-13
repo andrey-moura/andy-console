@@ -7,6 +7,8 @@
 #include <uva/format.hpp>
 #include <functional>
 
+#include <uva.hpp>
+
 #ifdef _WIN32
     #include <windows.h>
 #endif
@@ -156,7 +158,7 @@ namespace uva
         template<class... Args>
         void log_debug(const std::string& fmt, Args... args) {}    
 #else
-        void log_debug(const std::string& msg);
+        ANDY_EXPORT_SYMBOL void log_debug(const std::string& msg);
 
         template<class... Args>
         void log_debug(const std::string& fmt, Args... args)
