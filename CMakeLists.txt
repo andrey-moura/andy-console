@@ -25,5 +25,11 @@ if(UVA_CONSOLE_IS_TOP_LEVEL)
 	include("${CMAKE_CURRENT_LIST_DIR}/tool/CMakeLists.txt")
 endif()
 
+install(TARGETS uva-console EXPORT uva-consoleTargets)
+install(EXPORT uva-consoleTargets
+    FILE uva-consoleTargets.cmake
+    NAMESPACE uva::
+    DESTINATION lib/cmake/uva-console
+)
 install(TARGETS uva-console DESTINATION lib)
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/uva DESTINATION include)
