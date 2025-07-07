@@ -144,7 +144,7 @@ namespace uva
         void log_warning(std::string_view fmt, Args... args)
         {
             std::string msg = std::vformat(fmt, std::make_format_args(args...));
-            //log_warning(msg);
+            log_warning(msg);
         }
 
         template<class... Args>
