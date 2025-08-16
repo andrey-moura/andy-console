@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include <console.hpp>
-#include <uva/file.hpp>
+#include <andy/file.hpp>
 
 void console_controller::new_project()
 {
@@ -25,7 +25,7 @@ void console_controller::new_project()
 R"~~~(#include <iostream>
 #include <application.hpp>
 
-using namespace uva;
+using namespace andy;
 using namespace routing;
 using namespace console;
 
@@ -35,7 +35,7 @@ DECLARE_CONSOLE_APPLICATION(
 )
 )~~~";
 
-    uva::file::write_all_text(project_root / "config" / "routes.cpp", routes_template);
+    andy::file::write_all_text(project_root / "config" / "routes.cpp", routes_template);
 
     static std::string cmake_template =
     std::format(
@@ -48,7 +48,7 @@ include(${{CONSOLE_ROOT_DIR}}/console.cmake)
 
 add_console_app({})
 
-target_link_libraries({} uva-console uva-core uva-routing)
+target_link_libraries({} andy-console andy-core andy-routing)
 
 add_custom_command(TARGET {} 
                    POST_BUILD
@@ -56,7 +56,7 @@ add_custom_command(TARGET {}
 
 )~~~", project_name.to_downcase(), project_name.to_downcase(), project_name.to_downcase(), project_name.to_downcase(), project_name.to_downcase(), project_name.to_downcase());
 
-    uva::file::write_all_text(project_root / "CMakeLists.txt", cmake_template);
+    andy::file::write_all_text(project_root / "CMakeLists.txt", cmake_template);
 
     if(params.key("--git") != null) {
         std::cout << "Initializing git repository..." << std::endl;
@@ -66,7 +66,7 @@ add_custom_command(TARGET {}
 void console_controller::controller()
 {
     if(params.size() < 1) {
-        uva::console::log_error("error: missing param 'controller name'");
+        andy::console::log_error("error: missing param 'controller name'");
         return;        
     }
 
@@ -75,7 +75,7 @@ void console_controller::controller()
     std::filesystem::path controller_source = project_root / "src" / "controllers";
 
     if(!std::filesystem::exists(controller_include) || !std::filesystem::exists(controller_source)) {
-        uva::console::log_error("error: cannot find controllers folder");
+        andy::console::log_error("error: cannot find controllers folder");
         return;
     }
 
@@ -84,7 +84,7 @@ void console_controller::controller()
     const char* const controller_header_format =
 R"~~~(#include <application.hpp>
 
-using namespace uva;
+using namespace andy;
 using namespace routing;
 using namespace console;
 
@@ -101,11 +101,11 @@ R"~~~(#include <{}_controller.hpp>
 
 #include <console.hpp>
 #include <file.hpp>
-#include <uva/core.hpp>
+#include <andy/core.hpp>
 
 )~~~";
 
-    uva::file::write_all_text(controller_include / (controller_name + "_controller.hpp"), std::format(controller_header_format, controller_name));
-    uva::file::write_all_text(controller_source  / (controller_name + "_controller.cpp"), std::format(controller_source_format, controller_name));
+    andy::file::write_all_text(controller_include / (controller_name + "_controller.hpp"), std::format(controller_header_format, controller_name));
+    andy::file::write_all_text(controller_source  / (controller_name + "_controller.cpp"), std::format(controller_source_format, controller_name));
 
 }

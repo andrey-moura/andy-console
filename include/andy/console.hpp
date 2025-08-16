@@ -4,16 +4,16 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <uva/format.hpp>
+#include <andy/format.hpp>
 #include <functional>
 
-#include <uva.hpp>
+#include <andy.hpp>
 
 #ifdef _WIN32
     #include <windows.h>
 #endif
 
-namespace uva
+namespace andy
 {
     namespace console
     {

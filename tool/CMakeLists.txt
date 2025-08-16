@@ -7,7 +7,7 @@ include(${CONSOLE_ROOT_DIR}/console.cmake)
 
 add_console_app(console)
 
-target_link_libraries(console uva-console uva-core uva-routing uva-file)
+target_link_libraries(console andy-console andy-core andy-routing andy-file)
 
 add_custom_command(TARGET console 
                    POST_BUILD

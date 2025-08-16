@@ -1,8 +1,8 @@
-#include <uva/console.hpp>
+#include "andy/console.hpp"
 #include <filesystem>
 #include <fstream>
 
-void uva::console::put_on_cout(const std::string & msg)
+void andy::console::put_on_cout(const std::string & msg)
 {
     std::cout << msg << std::endl;
 }
@@ -23,46 +23,46 @@ std::ofstream& get_log()
     return *stream;
 }
 
-void uva::console::log(const std::string &msg)
+void andy::console::log(const std::string &msg)
 {
     std::cout << msg << std::endl;
 }
 
-void uva::console::log_error(const std::string& msg)
+void andy::console::log_error(const std::string& msg)
 {
-    std::cerr << uva::console::color(uva::console::color_code::red) << msg << std::endl;
+    std::cerr << andy::console::color(andy::console::color_code::red) << msg << std::endl;
 }
 
-void uva::console::log_success(const std::string& msg)
+void andy::console::log_success(const std::string& msg)
 {
-    std::cout << uva::console::color(uva::console::color_code::green) << msg << std::endl;
+    std::cout << andy::console::color(andy::console::color_code::green) << msg << std::endl;
 }
 
-void uva::console::print_warning(std::string_view msg)
+void andy::console::print_warning(std::string_view msg)
 {
-    std::cout << uva::console::color(uva::console::color_code::yellow) << msg.data();
+    std::cout << andy::console::color(andy::console::color_code::yellow) << msg.data();
 }
 
-void uva::console::log_warning(const std::string &msg) {
-  std::cout << uva::console::color(uva::console::color_code::yellow) << msg
+void andy::console::log_warning(const std::string &msg) {
+  std::cout << andy::console::color(andy::console::color_code::yellow) << msg
             << std::endl;
 }
 
-void uva::console::log_debug(const std::string& msg)
+void andy::console::log_debug(const std::string& msg)
 {
 #ifdef __UVA_DEBUG__
     get_log() << msg << std::endl;
 #endif
 }
 
-std::vector<std::string>& uva::console::get_args()
+std::vector<std::string>& andy::console::get_args()
 {
     static std::vector<std::string> args;
 
     return args;
 }
 
-std::map<std::string, std::string>& uva::console::get_named_args()
+std::map<std::string, std::string>& andy::console::get_named_args()
 {
     static std::map<std::string, std::string> named_args;
 
@@ -70,7 +70,7 @@ std::map<std::string, std::string>& uva::console::get_named_args()
 }
 
 
-void uva::console::init_args(const int argc, char** argv)
+void andy::console::init_args(const int argc, char** argv)
 {
     auto& args = get_args();
     auto& named_args = get_named_args();
@@ -111,17 +111,17 @@ void uva::console::init_args(const int argc, char** argv)
     }
 }
 
-size_t uva::console::args_count()
+size_t andy::console::args_count()
 {
     return get_args().size();
 }
 
-bool uva::console::has_args()
+bool andy::console::has_args()
 {
     return args_count();
 }
 
-std::string uva::console::front_arg()
+std::string andy::console::front_arg()
 {
     if(!has_args()) {
         throw std::out_of_range("front_arg error: there is no arguments");
